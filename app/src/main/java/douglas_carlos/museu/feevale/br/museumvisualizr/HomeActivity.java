@@ -2,8 +2,10 @@ package douglas_carlos.museu.feevale.br.museumvisualizr;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -33,5 +35,9 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void identifyKiosk(View view){
+        Log.d("CLICK", "button clicked");
     }
 }
