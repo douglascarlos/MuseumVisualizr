@@ -1,5 +1,10 @@
 package douglas_carlos.museu.feevale.br.museumvisualizr;
 
+import android.util.Log;
+import android.view.inputmethod.ExtractedTextRequest;
+
+import java.io.File;
+
 /**
  * Created by Douglas on 11/10/2015.
  */
@@ -28,7 +33,6 @@ public class Kiosk {
             index++;
         }
 
-        return -1;
+        return 0;
     }
-
 }

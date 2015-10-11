@@ -24,8 +24,7 @@ public class KioskActivity extends Activity {
         String codeKiosk = (String) getIntent().getExtras().get("codeKiosk");
         Log.d("CODE", codeKiosk);
 
-        int indexOfSearch = Kiosk.getIndexOf(codeKiosk);
-        kioskIndex = indexOfSearch > -1 ? indexOfSearch : 0;
+        kioskIndex = Kiosk.getIndexOf(codeKiosk);
         loadKiosk(kioskIndex);
     }
 
