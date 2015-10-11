@@ -68,8 +68,16 @@ public class HomeActivity extends Activity {
             String format = data.getStringExtra("SCAN_RESULT_FORMAT");
             this.txt_result.setText(format + " - " + content);
 
+            this.findKiosk(content);
+
         }
 
         Log.d("END", "onActivityResult");
+    }
+
+    public void findKiosk(String codeKiosk){
+        Intent kioskIntent = new Intent(getBaseContext(), KioskActivity.class);
+        kioskIntent.putExtra("codeKiosk", codeKiosk);
+        startActivity(kioskIntent);
     }
 }
