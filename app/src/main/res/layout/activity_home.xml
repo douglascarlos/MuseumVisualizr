@@ -14,4 +14,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:onClick="identifyKiosk"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="..."
+        android:id="@+id/txt_result"
+        android:layout_below="@+id/btn_identify"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

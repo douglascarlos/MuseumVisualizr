@@ -1,18 +1,24 @@
 package douglas_carlos.museu.feevale.br.museumvisualizr;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends Activity {
+
+    private TextView txt_result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        this.txt_result = (TextView) findViewById(R.id.txt_result);
     }
 
     @Override
@@ -38,6 +44,31 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void identifyKiosk(View view){
-        Log.d("CLICK", "button clicked");
+        Log.d("BEGIN", "identifyKiosk");
+
+        Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+        Log.d("DEBUG", "1");
+        intent.setPackage("com.google.zxing.client.android.SCAN");
+        Log.d("DEBUG", "2");
+        startActivityForResult(intent, 666);
+
+        Log.d("END", "identifyKiosk");
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("BEGIN", "onActivityResult");
+
+        if(resultCode == Activity.RESULT_OK){
+            Log.d("DEBUG_1", ""+resultCode);
+
+            String content = data.getStringExtra("SCAN_RESULT");
+            Log.d("CONTENT", content);
+
+            String format = data.getStringExtra("SCAN_RESULT_FORMAT");
+            this.txt_result.setText(format + " - " + content);
+
+        }
+
+        Log.d("END", "onActivityResult");
     }
 }
