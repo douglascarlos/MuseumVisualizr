@@ -9,9 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends Activity {
 
+    private final int REQUEST_CODE = 666;
     private TextView txt_result;
 
     @Override
@@ -44,15 +46,14 @@ public class HomeActivity extends Activity {
     }
 
     public void identifyKiosk(View view){
-        Log.d("BEGIN", "identifyKiosk");
-
-        Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-        Log.d("DEBUG", "1");
-        intent.setPackage("com.google.zxing.client.android.SCAN");
-        Log.d("DEBUG", "2");
-        startActivityForResult(intent, 666);
-
-        Log.d("END", "identifyKiosk");
+        try{
+            Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+            intent.setPackage("com.google.zxing.client.android");
+            this.startActivityForResult(intent, this.REQUEST_CODE);
+        }catch (Exception e){
+            Log.d("ERROR", e.getMessage());
+            Toast.makeText(this, "Aviso: Você deve ter Barcode Scanner instalado no seu dispositivo!", Toast.LENGTH_LONG).show();
+        }
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
