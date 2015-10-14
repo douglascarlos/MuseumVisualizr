@@ -1,18 +1,20 @@
 package douglas_carlos.museu.feevale.br.museumvisualizr;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
-import android.widget.TextView;
+
+import java.io.IOException;
 
 public class KioskActivity extends Activity {
 
-    private int kioskIndex;
     private WebView webViewKiosk;
+    private KioskManager kioskManager;
+    private int kioskIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +26,15 @@ public class KioskActivity extends Activity {
         String codeKiosk = (String) getIntent().getExtras().get("codeKiosk");
         Log.d("CODE", codeKiosk);
 
-        kioskIndex = Kiosk.getIndexOf(codeKiosk);
-        loadKiosk(kioskIndex);
+        try {
+            kioskManager = new KioskManager(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        kioskIndex = kioskManager.getIndexOf(codeKiosk);
+//        loadKiosk(kioskIndex);
+        loadKiosk(codeKiosk);
     }
 
     @Override
@@ -50,7 +59,11 @@ public class KioskActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void loadKiosk(int index){
-        webViewKiosk.loadUrl(Kiosk.getURLFrom(index));
+//    public void loadKiosk(int index){
+//        webViewKiosk.loadUrl(kioskManager.getURLFrom(index));
+//    }
+
+    public void loadKiosk(String str){
+        webViewKiosk.loadUrl(kioskManager.getURLFrom(str));
     }
 }

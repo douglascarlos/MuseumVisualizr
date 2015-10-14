@@ -2,7 +2,6 @@ package douglas_carlos.museu.feevale.br.museumvisualizr;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,16 +10,25 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 public class HomeActivity extends Activity {
 
     private final int REQUEST_CODE = 666;
+    private KioskManager kioskManager;
     private TextView txt_result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         this.txt_result = (TextView) findViewById(R.id.txt_result);
+        try {
+            this.kioskManager = new KioskManager(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -69,15 +77,28 @@ public class HomeActivity extends Activity {
             this.txt_result.setText(format + " - " + content);
 
             this.findKiosk(content);
-
         }
 
         Log.d("END", "onActivityResult");
     }
 
     public void findKiosk(String codeKiosk){
+        if(kioskManager.has(codeKiosk))
+            this.loadKioskPage(codeKiosk);
+        else {
+            String strMsg = "O quiosque \"" + codeKiosk + "\" não foi encontrado!";
+            Toast.makeText(this, strMsg, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void loadKioskPage(String codeKiosk) {
         Intent kioskIntent = new Intent(getBaseContext(), KioskActivity.class);
         kioskIntent.putExtra("codeKiosk", codeKiosk);
         startActivity(kioskIntent);
     }
+
+//    public void onIdentifyManually(View v){
+//        TextView editText = (TextView) findViewById(R.id.editText);
+//        this.findKiosk(editText.getText().toString());
+//    }
 }
