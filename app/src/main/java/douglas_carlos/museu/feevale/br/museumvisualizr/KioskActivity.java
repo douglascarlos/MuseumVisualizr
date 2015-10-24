@@ -32,8 +32,6 @@ public class KioskActivity extends Activity {
             e.printStackTrace();
         }
 
-//        kioskIndex = kioskManager.getIndexOf(codeKiosk);
-//        loadKiosk(kioskIndex);
         loadKiosk(codeKiosk);
     }
 
@@ -58,10 +56,6 @@ public class KioskActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
-
-//    public void loadKiosk(int index){
-//        webViewKiosk.loadUrl(kioskManager.getURLFrom(index));
-//    }
 
     public void loadKiosk(String str){
         webViewKiosk.loadUrl(kioskManager.getURLFrom(str));

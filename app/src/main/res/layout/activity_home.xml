@@ -10,9 +10,8 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_identify_kiosk"
         android:id="@+id/btn_identify"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="identifyKiosk"/>
+        android:onClick="identifyKiosk"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

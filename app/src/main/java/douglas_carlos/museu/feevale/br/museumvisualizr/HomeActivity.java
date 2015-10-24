@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class HomeActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -66,7 +68,7 @@ public class HomeActivity extends Activity {
         Log.d("BEGIN", "onActivityResult");
 
         if(resultCode == Activity.RESULT_OK){
-            Log.d("DEBUG_1", ""+resultCode);
+            Log.d("DEBUG_1", "" + resultCode);
 
             String content = data.getStringExtra("SCAN_RESULT");
             Log.d("CONTENT", content);
@@ -92,8 +94,4 @@ public class HomeActivity extends Activity {
         startActivity(kioskIntent);
     }
 
-//    public void onIdentifyManually(View v){
-//        TextView editText = (TextView) findViewById(R.id.editText);
-//        this.findKiosk(editText.getText().toString());
-//    }
 }
