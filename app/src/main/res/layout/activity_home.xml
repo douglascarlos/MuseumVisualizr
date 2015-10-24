@@ -15,29 +15,4 @@
         android:layout_alignParentEnd="true"
         android:onClick="identifyKiosk"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="..."
-        android:id="@+id/txt_result"
-        android:layout_below="@+id/btn_identify"
-        android:layout_alignParentStart="true" />
-
-    <!--<EditText-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/editText"-->
-        <!--android:layout_below="@+id/txt_result"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignEnd="@+id/btn_identify" />-->
-
-    <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/btn_identify_kiosk_manually"-->
-        <!--android:id="@+id/button"-->
-        <!--android:layout_below="@+id/editText"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:onClick="onIdentifyManually" />-->
 </RelativeLayout>

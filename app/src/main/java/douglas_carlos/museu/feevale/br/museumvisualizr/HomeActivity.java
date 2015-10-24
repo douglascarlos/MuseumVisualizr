@@ -16,14 +16,12 @@ public class HomeActivity extends Activity {
 
     private final int REQUEST_CODE = 666;
     private KioskManager kioskManager;
-    private TextView txt_result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        this.txt_result = (TextView) findViewById(R.id.txt_result);
         try {
             this.kioskManager = new KioskManager(this);
         } catch (IOException e) {
@@ -72,9 +70,6 @@ public class HomeActivity extends Activity {
 
             String content = data.getStringExtra("SCAN_RESULT");
             Log.d("CONTENT", content);
-
-            String format = data.getStringExtra("SCAN_RESULT_FORMAT");
-            this.txt_result.setText(format + " - " + content);
 
             this.findKiosk(content);
         }
