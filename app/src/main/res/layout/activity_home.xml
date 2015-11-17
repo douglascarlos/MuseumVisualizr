@@ -11,7 +11,27 @@
         android:text="@string/btn_identify_kiosk"
         android:id="@+id/btn_identify"
         android:onClick="identifyKiosk"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="104dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtVisitor"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/btnVisitor" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:id="@+id/btnVisitor"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="saveVisitor"/>
+
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package douglas_carlos.museu.feevale.br.museumvisualizr;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +19,12 @@ public class HomeActivity extends Activity {
     private final int REQUEST_CODE = 666;
     private KioskManager kioskManager;
 
+    private TextView txtVisitor;
+    static final String PREF_VISITOR = "Preferencias";
+    static final String VISITOR_NAME = "NOME";
+    String nameVisitor;
+    SharedPreferences shPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -29,6 +36,11 @@ public class HomeActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        shPref = getSharedPreferences(PREF_VISITOR, 0);
+        nameVisitor = shPref.getString(VISITOR_NAME, "Sem Nome!");
+        txtVisitor = (TextView) findViewById(R.id.txtVisitor);
+        txtVisitor.setText(nameVisitor);
     }
 
     @Override
@@ -87,6 +99,14 @@ public class HomeActivity extends Activity {
         Intent kioskIntent = new Intent(getBaseContext(), KioskActivity.class);
         kioskIntent.putExtra("codeKiosk", codeKiosk);
         startActivity(kioskIntent);
+    }
+
+    public void saveVisitor(View view){
+        SharedPreferences.Editor editor = shPref.edit();
+        editor.putString(VISITOR_NAME, txtVisitor.getText().toString());
+        nameVisitor = txtVisitor.getText().toString();
+        editor.commit();
+        Toast.makeText(this, nameVisitor + " salvo como visitante titular!", Toast.LENGTH_LONG).show();
     }
 
 }
