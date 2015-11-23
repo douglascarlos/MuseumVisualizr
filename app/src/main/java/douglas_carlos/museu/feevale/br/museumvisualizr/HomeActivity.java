@@ -22,7 +22,6 @@ public class HomeActivity extends Activity {
     private TextView txtVisitor;
     static final String PREF_VISITOR = "Preferencias";
     static final String VISITOR_NAME = "NOME";
-    String nameVisitor;
     SharedPreferences shPref;
 
     @Override
@@ -38,7 +37,7 @@ public class HomeActivity extends Activity {
         }
 
         shPref = getSharedPreferences(PREF_VISITOR, 0);
-        nameVisitor = shPref.getString(VISITOR_NAME, "Sem Nome!");
+        String nameVisitor = shPref.getString(VISITOR_NAME, "Sem Nome!");
         txtVisitor = (TextView) findViewById(R.id.txtVisitor);
         txtVisitor.setText(nameVisitor);
     }
@@ -86,6 +85,12 @@ public class HomeActivity extends Activity {
         Log.d("END", "onActivityResult");
     }
 
+    public void searchKiosk(View v){
+        TextView txtField = (TextView) findViewById(R.id.txtKiosk);
+        String str = txtField.getText().toString();
+        this.findKiosk(str);
+    }
+
     public void findKiosk(String codeKiosk){
         if(kioskManager.has(codeKiosk))
             this.loadKioskPage(codeKiosk);
@@ -104,7 +109,7 @@ public class HomeActivity extends Activity {
     public void saveVisitor(View view){
         SharedPreferences.Editor editor = shPref.edit();
         editor.putString(VISITOR_NAME, txtVisitor.getText().toString());
-        nameVisitor = txtVisitor.getText().toString();
+        String nameVisitor = txtVisitor.getText().toString();
         editor.commit();
         Toast.makeText(this, nameVisitor + " salvo como visitante titular!", Toast.LENGTH_LONG).show();
     }
