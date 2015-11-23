@@ -2,6 +2,7 @@ package douglas_carlos.museu.feevale.br.museumvisualizr;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 
 import java.io.IOException;
+import java.util.List;
 
 public class KioskActivity extends Activity {
 
@@ -31,6 +33,15 @@ public class KioskActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        DBHelper helper = new DBHelper(this);
+        helper.open();
+
+        List<Visit> all = Visit.all(helper);
+        Log.d("NUMBER_OF_VISITS", String.valueOf(all.size()));
+        Visit.saveVisit(helper, codeKiosk);
+
+        helper.close();
 
         loadKiosk(codeKiosk);
     }
