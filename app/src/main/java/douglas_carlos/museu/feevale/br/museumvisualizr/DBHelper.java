@@ -5,12 +5,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.Calendar;
+
 /**
  * Created by jszab on 22/11/2015.
  */
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     private SQLiteDatabase db;
 
@@ -26,7 +28,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        if(oldVersion < newVersion) {
+            Log.d("DATABASE", "onUpgrade!");
+            db.execSQL("DROP TABLE IF EXISTS " + Visit.TABLE_NAME);
+            this.onCreate(db);
+        }
     }
 
     public void open(){
@@ -39,5 +45,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void close(){
         db.close();
+    }
+
+    public static String getToday(){
+        Calendar c = Calendar.getInstance();
+        return c.get(Calendar.YEAR) +"-"+
+                c.get(Calendar.MONTH) +"-"+
+                c.get(Calendar.DAY_OF_MONTH) +" "+
+                c.get(Calendar.HOUR_OF_DAY) +":"+
+                c.get(Calendar.MINUTE) +":"+
+                c.get(Calendar.SECOND);
     }
 }

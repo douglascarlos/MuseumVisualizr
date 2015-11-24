@@ -16,9 +16,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Douglas on 11/10/2015.
- */
 public class KioskManager {
 
     private Context context;

@@ -39,7 +39,7 @@ public class KioskActivity extends Activity {
 
         List<Visit> all = Visit.all(helper);
         Log.d("NUMBER_OF_VISITS", String.valueOf(all.size()));
-        Visit.saveVisit(helper, codeKiosk);
+        Visit.saveVisit(helper, codeKiosk, UserHelper.get(this));
 
         helper.close();
 

@@ -20,9 +20,6 @@ public class HomeActivity extends Activity {
     private KioskManager kioskManager;
 
     private TextView txtVisitor;
-    static final String PREF_VISITOR = "Preferencias";
-    static final String VISITOR_NAME = "NOME";
-    SharedPreferences shPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +33,7 @@ public class HomeActivity extends Activity {
             e.printStackTrace();
         }
 
-        shPref = getSharedPreferences(PREF_VISITOR, 0);
-        String nameVisitor = shPref.getString(VISITOR_NAME, "Sem Nome!");
+        String nameVisitor = UserHelper.get(this);
         txtVisitor = (TextView) findViewById(R.id.txtVisitor);
         txtVisitor.setText(nameVisitor);
     }
@@ -107,10 +103,8 @@ public class HomeActivity extends Activity {
     }
 
     public void saveVisitor(View view){
-        SharedPreferences.Editor editor = shPref.edit();
-        editor.putString(VISITOR_NAME, txtVisitor.getText().toString());
         String nameVisitor = txtVisitor.getText().toString();
-        editor.commit();
+        UserHelper.set(nameVisitor);
         Toast.makeText(this, nameVisitor + " salvo como visitante titular!", Toast.LENGTH_LONG).show();
     }
 

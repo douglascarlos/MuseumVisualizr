@@ -5,11 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by jszab on 23/11/2015.
- */
 public class Visit {
 
     public static String TABLE_NAME = "visits";
@@ -17,21 +15,24 @@ public class Visit {
     public static String COL_DATE = "date";
     public static String COL_KIOSK_CODE = "kiosk_code";
     public static String COL_SYNCED = "synced";
-    public static String COLUMNS[] = {COL_ID, COL_DATE, COL_KIOSK_CODE, COL_SYNCED};
+    public static String COL_USER_NAME = "user_name";
+    public static String COLUMNS[] = {COL_ID, COL_DATE, COL_KIOSK_CODE, COL_SYNCED, COL_USER_NAME};
 
     public static String onCreateSQL() {
         return "create table " + TABLE_NAME + "(" +
             COL_ID + " integer primary key autoincrement," +
-            COL_DATE + " integer not null," +
+            COL_DATE + " text not null," +
             COL_KIOSK_CODE + " text not null," +
-            COL_SYNCED + " integer not null" +
+            COL_SYNCED + " integer not null," +
+            COL_USER_NAME + " text not null" +
             ")";
     }
 
     private long idVisit;
-    private long date;
+    private String date;
     private String kioskCode;
     private int synced;
+    private String userName;
 
     public Visit(){
         idVisit = 0;
@@ -40,7 +41,7 @@ public class Visit {
 
     public Visit(Cursor row){
         idVisit = row.getInt(row.getColumnIndex(COL_ID));
-        date = row.getInt(row.getColumnIndex(COL_DATE));
+        date = row.getString(row.getColumnIndex(COL_DATE));
         kioskCode = row.getString(row.getColumnIndex(COL_KIOSK_CODE));
         synced = row.getInt(row.getColumnIndex(COL_SYNCED));
     }
@@ -49,11 +50,11 @@ public class Visit {
         return idVisit;
     }
 
-    public long getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(long date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -65,12 +66,17 @@ public class Visit {
         this.kioskCode = kioskCode;
     }
 
+    public void setUserName(String userName){ this.userName = userName; }
+
+    public String getUserName(){ return this.userName; }
+
     public boolean save(DBHelper db){
         if(idVisit == 0){
             ContentValues values = new ContentValues();
             values.put(COL_DATE, date);
             values.put(COL_KIOSK_CODE, kioskCode);
             values.put(COL_SYNCED, synced);
+            values.put(COL_USER_NAME, userName);
             idVisit = db.getDB().insert(TABLE_NAME, null, values);
 
             return true;
@@ -82,10 +88,11 @@ public class Visit {
         return false;
     }
 
-    public static void saveVisit(DBHelper db, String code) {
+    public static void saveVisit(DBHelper db, String code, String userName) {
         Visit visit = new Visit();
         visit.setKioskCode(code);
-        visit.setDate(System.currentTimeMillis() / 1000L);
+        visit.setDate(DBHelper.getToday());
+        visit.setUserName(userName);
         visit.save(db);
     }
 
