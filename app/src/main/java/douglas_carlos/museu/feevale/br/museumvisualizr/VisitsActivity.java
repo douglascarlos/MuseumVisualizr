@@ -5,13 +5,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
-public class SyncedActivity extends AppCompatActivity {
+import java.util.List;
+
+import douglas_carlos.museu.feevale.br.museumvisualizr.utils.VisitAdapter;
+
+public class VisitsActivity extends KioskHandlerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_synced);
+        setContentView(R.layout.activity_visits);
+
+        loadVisits();
     }
 
     @Override
@@ -34,6 +41,17 @@ public class SyncedActivity extends AppCompatActivity {
 //        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void loadVisits(){
+        DBHelper helper = getDBHelper();
+        helper.open();
+        List<Visit> visits = Visit.all(helper);
+        helper.close();
+
+        VisitAdapter adapter = new VisitAdapter(this, visits);
+        ListView listVisits = (ListView) findViewById(R.id.list_visits);
+        listVisits.setAdapter(adapter);
     }
 
     public void syncVisits(View view){

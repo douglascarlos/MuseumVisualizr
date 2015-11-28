@@ -37,8 +37,6 @@ public class KioskActivity extends Activity {
         DBHelper helper = new DBHelper(this);
         helper.open();
 
-        List<Visit> all = Visit.all(helper);
-        Log.d("NUMBER_OF_VISITS", String.valueOf(all.size()));
         Visit.saveVisit(helper, codeKiosk, UserHelper.get(this));
 
         helper.close();

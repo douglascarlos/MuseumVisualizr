@@ -43,12 +43,12 @@ public class HomeActivity extends KioskHandlerActivity {
         Intent intent;
 
         switch(id){
-            case R.id.text_search:
+            case R.id.action_text_search:
                 intent = new Intent(getBaseContext(), TextSearchActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.action_sync:
-                intent = new Intent(getBaseContext(), SyncedActivity.class);
+            case R.id.action_view_visits:
+                intent = new Intent(getBaseContext(), VisitsActivity.class);
                 startActivity(intent);
                 break;
         }

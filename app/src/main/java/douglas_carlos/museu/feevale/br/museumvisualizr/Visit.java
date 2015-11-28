@@ -74,6 +74,10 @@ public class Visit {
 
     public String getUserName(){ return this.userName; }
 
+    public boolean isSynced() {
+        return synced == 1;
+    }
+
     public boolean save(DBHelper db){
         if(idVisit == 0){
             ContentValues values = new ContentValues();
@@ -132,5 +136,4 @@ public class Visit {
         json.put(COL_USER_NAME, userName);
         return json;
     }
-
 }

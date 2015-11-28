@@ -21,7 +21,7 @@
             android:label="@string/title_activity_kiosk" >
         </activity>
         <activity
-            android:name=".SyncedActivity"
+            android:name=".VisitsActivity"
             android:label="@string/title_activity_synced" >
         </activity>
         <activity

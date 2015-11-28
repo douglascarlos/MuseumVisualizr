@@ -44,4 +44,8 @@ public abstract class KioskHandlerActivity extends AppCompatActivity {
         startActivity(kioskIntent);
     }
 
+    protected DBHelper getDBHelper(){
+        return new DBHelper(this);
+    }
+
 }
