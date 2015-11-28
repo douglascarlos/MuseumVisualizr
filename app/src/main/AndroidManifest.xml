@@ -20,6 +20,10 @@
             android:name=".KioskActivity"
             android:label="@string/title_activity_kiosk" >
         </activity>
+        <activity
+            android:name=".SyncedActivity"
+            android:label="@string/title_activity_synced" >
+        </activity>
     </application>
 
 </manifest>

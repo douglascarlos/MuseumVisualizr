@@ -12,7 +12,7 @@ import java.util.Calendar;
  */
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 4;
 
     private SQLiteDatabase db;
 
@@ -28,11 +28,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion < newVersion) {
-            Log.d("DATABASE", "onUpgrade!");
-            db.execSQL("DROP TABLE IF EXISTS " + Visit.TABLE_NAME);
-            this.onCreate(db);
-        }
+        Log.d("DATABASE", "onUpgrade!");
+        db.execSQL("DROP TABLE IF EXISTS " + Visit.TABLE_NAME);
+        onCreate(db);
     }
 
     public void open(){

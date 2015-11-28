@@ -6,4 +6,6 @@
     <string name="btn_identify_kiosk">Identificar Quiosque</string>
     <string name="title_activity_kiosk">KioskActivity</string>
     <string name="btn_identify_kiosk_manually">Identificar quiosque manualmente</string>
+    <string name="title_activity_synced">SyncedActivity</string>
+    <string name="synced_visits">Sincronizar Visitas</string>
 </resources>

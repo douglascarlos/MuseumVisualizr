@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -44,6 +47,7 @@ public class Visit {
         date = row.getString(row.getColumnIndex(COL_DATE));
         kioskCode = row.getString(row.getColumnIndex(COL_KIOSK_CODE));
         synced = row.getInt(row.getColumnIndex(COL_SYNCED));
+        userName = row.getString(row.getColumnIndex(COL_USER_NAME));
     }
 
     public long getId(){
@@ -96,9 +100,9 @@ public class Visit {
         visit.save(db);
     }
 
-    public static List<Visit> all(DBHelper db) {
+    public static List<Visit> all(DBHelper db, String where) {
         List<Visit> list = new ArrayList<Visit>();
-        Cursor cursor = db.getDB().query(TABLE_NAME, COLUMNS, null, null, null, null, COL_ID);
+        Cursor cursor = db.getDB().query(TABLE_NAME, COLUMNS, where, null, null, null, COL_ID);
 
         if(cursor.getCount() > 0){
             cursor.moveToFirst();
@@ -110,4 +114,23 @@ public class Visit {
 
         return list;
     }
+
+    public static List<Visit> all(DBHelper db) {
+        return Visit.all(db, null);
+    }
+
+    public static List<Visit> allNotSynced(DBHelper db) {
+        return Visit.all(db, COL_SYNCED + "=0");
+    }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject json = new JSONObject();
+        json.put(COL_ID, idVisit);
+        json.put(COL_KIOSK_CODE, kioskCode);
+        json.put(COL_DATE, date);
+        json.put(COL_SYNCED, synced);
+        json.put(COL_USER_NAME, userName);
+        return json;
+    }
+
 }
