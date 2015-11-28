@@ -24,6 +24,10 @@
             android:name=".SyncedActivity"
             android:label="@string/title_activity_synced" >
         </activity>
+        <activity
+            android:name=".TextSearchActivity"
+            android:label="@string/title_activity_text_search" >
+        </activity>
     </application>
 
 </manifest>

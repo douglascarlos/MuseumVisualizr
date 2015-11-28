@@ -2,24 +2,17 @@ package douglas_carlos.museu.feevale.br.museumvisualizr;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends KioskHandlerActivity {
 
     private final int REQUEST_CODE = 666;
-    private KioskManager kioskManager;
 
     private TextView txtVisitor;
 
@@ -28,12 +21,6 @@ public class HomeActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        try {
-            this.kioskManager = new KioskManager(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         String nameVisitor = UserHelper.get(this);
         txtVisitor = (TextView) findViewById(R.id.txtVisitor);
@@ -53,10 +40,17 @@ public class HomeActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        Intent intent;
 
-        if (id == R.id.action_sync) {
-            Intent intent = new Intent(getBaseContext(), SyncedActivity.class);
-            startActivity(intent);
+        switch(id){
+            case R.id.text_search:
+                intent = new Intent(getBaseContext(), TextSearchActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.action_sync:
+                intent = new Intent(getBaseContext(), SyncedActivity.class);
+                startActivity(intent);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -86,27 +80,6 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         Log.d("END", "onActivityResult");
-    }
-
-    public void searchKiosk(View v){
-        TextView txtField = (TextView) findViewById(R.id.txtKiosk);
-        String str = txtField.getText().toString();
-        this.findKiosk(str);
-    }
-
-    public void findKiosk(String codeKiosk){
-        if(kioskManager.has(codeKiosk))
-            this.loadKioskPage(codeKiosk);
-        else {
-            String strMsg = "O quiosque \"" + codeKiosk + "\" não foi encontrado!";
-            Toast.makeText(this, strMsg, Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void loadKioskPage(String codeKiosk) {
-        Intent kioskIntent = new Intent(getBaseContext(), KioskActivity.class);
-        kioskIntent.putExtra("codeKiosk", codeKiosk);
-        startActivity(kioskIntent);
     }
 
     public void saveVisitor(View view){

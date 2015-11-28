@@ -9,4 +9,7 @@
     <string name="title_activity_synced">SyncedActivity</string>
     <string name="synced_visits">Sincronizar Visitas</string>
     <string name="sync_data">Sincronizar Dados</string>
+    <string name="title_activity_text_search">TextSearchActivity</string>
+    <string name="search_with_text">Buscar com texto</string>
+    <string name="visitor_name_label">Nome do visitante:</string>
 </resources>

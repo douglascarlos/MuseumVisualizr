@@ -5,23 +5,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".HomeActivity">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtKiosk"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/btnVisitor" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_identify_kiosk_manually"
-        android:id="@+id/btnKiosk"
-        android:onClick="searchKiosk"
-        android:layout_below="@+id/txtKiosk"
-        android:layout_centerHorizontal="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,6 +14,15 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="104dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/visitor_name_label"
+        android:id="@+id/textView"
+        android:layout_above="@+id/txtVisitor"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/btnVisitor" />
 
     <EditText
         android:layout_width="wrap_content"
