@@ -1,4 +1,4 @@
-package douglas_carlos.museu.feevale.br.museumvisualizr;
+package douglas_carlos.museu.feevale.br.museumvisualizr.utils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

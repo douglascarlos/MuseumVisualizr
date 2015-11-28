@@ -1,6 +1,5 @@
 package douglas_carlos.museu.feevale.br.museumvisualizr;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +8,9 @@ import android.widget.ListView;
 
 import java.util.List;
 
+import douglas_carlos.museu.feevale.br.museumvisualizr.utils.DBHelper;
+import douglas_carlos.museu.feevale.br.museumvisualizr.utils.Requester;
+import douglas_carlos.museu.feevale.br.museumvisualizr.utils.Visit;
 import douglas_carlos.museu.feevale.br.museumvisualizr.utils.VisitAdapter;
 
 public class VisitsActivity extends KioskHandlerActivity {

@@ -1,4 +1,4 @@
-package douglas_carlos.museu.feevale.br.museumvisualizr;
+package douglas_carlos.museu.feevale.br.museumvisualizr.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -17,6 +17,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
+
+import douglas_carlos.museu.feevale.br.museumvisualizr.utils.DBHelper;
+import douglas_carlos.museu.feevale.br.museumvisualizr.utils.Visit;
 
 public class Requester extends AsyncTask<Void, Void, Void> {
 

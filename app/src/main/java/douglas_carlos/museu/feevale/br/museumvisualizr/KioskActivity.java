@@ -1,8 +1,6 @@
 package douglas_carlos.museu.feevale.br.museumvisualizr;
 
 import android.app.Activity;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,7 +8,11 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 
 import java.io.IOException;
-import java.util.List;
+
+import douglas_carlos.museu.feevale.br.museumvisualizr.utils.DBHelper;
+import douglas_carlos.museu.feevale.br.museumvisualizr.utils.KioskManager;
+import douglas_carlos.museu.feevale.br.museumvisualizr.utils.UserHelper;
+import douglas_carlos.museu.feevale.br.museumvisualizr.utils.Visit;
 
 public class KioskActivity extends Activity {
 

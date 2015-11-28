@@ -12,7 +12,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import douglas_carlos.museu.feevale.br.museumvisualizr.R;
-import douglas_carlos.museu.feevale.br.museumvisualizr.Visit;
 
 public class VisitAdapter extends BaseAdapter{
 

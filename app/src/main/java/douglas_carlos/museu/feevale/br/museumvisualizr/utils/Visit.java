@@ -1,14 +1,12 @@
-package douglas_carlos.museu.feevale.br.museumvisualizr;
+package douglas_carlos.museu.feevale.br.museumvisualizr.utils;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class Visit {

@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import douglas_carlos.museu.feevale.br.museumvisualizr.utils.UserHelper;
+
 public class HomeActivity extends KioskHandlerActivity {
 
     private final int REQUEST_CODE = 666;
