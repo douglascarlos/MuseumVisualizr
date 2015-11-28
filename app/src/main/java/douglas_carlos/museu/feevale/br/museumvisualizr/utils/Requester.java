@@ -3,6 +3,7 @@ package douglas_carlos.museu.feevale.br.museumvisualizr.utils;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.provider.Settings;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -26,6 +27,8 @@ public class Requester extends AsyncTask<Void, Void, Void> {
     private ProgressDialog progress;
     private Context context;
     private String data;
+
+    protected final static String SERVICE_DOMAIN = "museumvisualizr.esy.es";
 
     public Requester(Context context) {
         this.progress = new ProgressDialog(context);;
@@ -73,10 +76,16 @@ public class Requester extends AsyncTask<Void, Void, Void> {
             StringBuilder values = new StringBuilder();
             values.append(URLEncoder.encode("json", "UTF-8"));
             values.append("=");
-            values.append(URLEncoder.encode(data,"UTF-8"));
+            values.append(URLEncoder.encode(data, "UTF-8"));
 
-            URL url = new URL("http://museumvisualizr.esy.es/sync/index.php");
-            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            values.append("&");
+
+            values.append(URLEncoder.encode("android_id", "UTF-8"));
+            values.append("=");
+            values.append(URLEncoder.encode(Settings.Secure.ANDROID_ID, "UTF-8"));
+
+            URL url = new URL("http://" + SERVICE_DOMAIN + "/sync/index.php");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
@@ -89,6 +98,7 @@ public class Requester extends AsyncTask<Void, Void, Void> {
             out.flush();
 
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            Log.d("POST_DATA", values.toString());
             Log.d("CODE", conn.getResponseCode() + "");
             Log.d("IN", in.readLine());
 
