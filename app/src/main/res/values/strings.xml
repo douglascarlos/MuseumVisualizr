@@ -8,4 +8,5 @@
     <string name="btn_identify_kiosk_manually">Identificar quiosque manualmente</string>
     <string name="title_activity_synced">SyncedActivity</string>
     <string name="synced_visits">Sincronizar Visitas</string>
+    <string name="sync_data">Sincronizar Dados</string>
 </resources>
