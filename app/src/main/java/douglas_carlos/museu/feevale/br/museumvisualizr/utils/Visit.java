@@ -119,8 +119,8 @@ public class Visit {
         List<Visit> list = new ArrayList<Visit>();
 
         String sortOrder =
-                COL_SYNCED + " DESC, " +
-                COL_ID + " ASC";
+                COL_SYNCED + " ASC, " +
+                COL_ID + " DESC";
         Cursor cursor = db.getDB().query(TABLE_NAME, COLUMNS, where, null, null, null, sortOrder);
 
         if(cursor.getCount() > 0){
