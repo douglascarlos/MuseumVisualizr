@@ -84,7 +84,7 @@ public class Requester extends AsyncTask<Void, Void, Void> {
             values.append("=");
             values.append(URLEncoder.encode(Settings.Secure.ANDROID_ID, "UTF-8"));
 
-            URL url = new URL("http://" + SERVICE_DOMAIN + "/sync/index.php");
+            URL url = new URL("http://" + SERVICE_DOMAIN + "/sync.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setReadTimeout(10000);
