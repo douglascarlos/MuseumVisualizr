@@ -2,12 +2,15 @@ package douglas_carlos.museu.feevale.br.museumvisualizr.utils;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import douglas_carlos.museu.feevale.br.museumvisualizr.R;
 
 public class Visit {
 
@@ -68,12 +71,18 @@ public class Visit {
         this.kioskCode = kioskCode;
     }
 
+    public void setSynced(int synced) { this.synced = synced; }
+
     public void setUserName(String userName){ this.userName = userName; }
 
     public String getUserName(){ return this.userName; }
 
     public boolean isSynced() {
         return synced == 1;
+    }
+
+    public int getDescriptionStatus(){
+        return isSynced() ? R.string.synced : R.string.in_cache;
     }
 
     public boolean save(DBHelper db){
@@ -88,10 +97,19 @@ public class Visit {
             return true;
         }
         else{
-//            in case of updates
-        }
+            ContentValues values = new ContentValues();
+            values.put(COL_DATE, date);
+            values.put(COL_KIOSK_CODE, kioskCode);
+            values.put(COL_SYNCED, synced);
+            values.put(COL_USER_NAME, userName);
 
-        return false;
+            String where = COL_ID + " = ?";
+            String[] whereArgs = { String.valueOf(idVisit) };
+            int rowsAffected = db.getDB().update(TABLE_NAME, values, where, whereArgs);
+            
+            Log.d("ROWS_AFFECTED",String.valueOf(rowsAffected));
+            return true;
+        }
     }
 
     public static void saveVisit(DBHelper db, String code, String userName) {
@@ -133,5 +151,12 @@ public class Visit {
         json.put(COL_SYNCED, synced);
         json.put(COL_USER_NAME, userName);
         return json;
+    }
+
+    public static void updateAsSynchronized(DBHelper db, List<Visit> visits){
+        for (Visit visit : visits){
+            visit.setSynced(1);
+            visit.save(db);
+        }
     }
 }

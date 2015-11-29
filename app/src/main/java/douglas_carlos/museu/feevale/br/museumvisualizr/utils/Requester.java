@@ -53,6 +53,7 @@ public class Requester extends AsyncTask<Void, Void, Void> {
         try {
 
             data = toJsonArray(visits).toString();
+            Visit.updateAsSynchronized(helper, visits);
 
         } catch (JSONException e) {
             e.printStackTrace();

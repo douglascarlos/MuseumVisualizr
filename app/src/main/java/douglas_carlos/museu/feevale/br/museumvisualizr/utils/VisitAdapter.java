@@ -52,7 +52,7 @@ public class VisitAdapter extends BaseAdapter{
         TextView date = (TextView) rowVisit.findViewById(R.id.date);
         date.setText(visit.getDate());
         TextView synced = (TextView) rowVisit.findViewById(R.id.synced);
-        String str = context.getString(visit.isSynced() ? R.string.synced : R.string.in_cache);
+        String str = context.getString(visit.getDescriptionStatus());
         synced.setText(str);
         synced.setTextColor(visit.isSynced() ? Color.GREEN : Color.RED);
 
