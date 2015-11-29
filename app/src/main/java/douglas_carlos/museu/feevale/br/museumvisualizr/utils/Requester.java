@@ -2,6 +2,7 @@ package douglas_carlos.museu.feevale.br.museumvisualizr.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.util.Log;
@@ -19,6 +20,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
+import douglas_carlos.museu.feevale.br.museumvisualizr.VisitsActivity;
 import douglas_carlos.museu.feevale.br.museumvisualizr.utils.DBHelper;
 import douglas_carlos.museu.feevale.br.museumvisualizr.utils.Visit;
 
@@ -116,5 +118,7 @@ public class Requester extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         progress.dismiss();
+        Intent intent = new Intent(context, VisitsActivity.class);
+        context.startActivity(intent);
     }
 }

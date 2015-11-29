@@ -87,29 +87,24 @@ public class Visit {
 
     public boolean save(DBHelper db){
         if(idVisit == 0){
-            ContentValues values = new ContentValues();
-            values.put(COL_DATE, date);
-            values.put(COL_KIOSK_CODE, kioskCode);
-            values.put(COL_SYNCED, synced);
-            values.put(COL_USER_NAME, userName);
-            idVisit = db.getDB().insert(TABLE_NAME, null, values);
-
+            idVisit = db.getDB().insert(TABLE_NAME, null, prepareVisitToBD());
             return true;
         }
-        else{
-            ContentValues values = new ContentValues();
-            values.put(COL_DATE, date);
-            values.put(COL_KIOSK_CODE, kioskCode);
-            values.put(COL_SYNCED, synced);
-            values.put(COL_USER_NAME, userName);
 
-            String where = COL_ID + " = ?";
-            String[] whereArgs = { String.valueOf(idVisit) };
-            int rowsAffected = db.getDB().update(TABLE_NAME, values, where, whereArgs);
-            
-            Log.d("ROWS_AFFECTED",String.valueOf(rowsAffected));
-            return true;
-        }
+        String where = COL_ID + " = ?";
+        String[] whereArgs = { String.valueOf(idVisit) };
+        int rowsAffected = db.getDB().update(TABLE_NAME, prepareVisitToBD(), where, whereArgs);
+        return true;
+
+    }
+
+    private ContentValues prepareVisitToBD(){
+        ContentValues values = new ContentValues();
+        values.put(COL_DATE, date);
+        values.put(COL_KIOSK_CODE, kioskCode);
+        values.put(COL_SYNCED, synced);
+        values.put(COL_USER_NAME, userName);
+        return values;
     }
 
     public static void saveVisit(DBHelper db, String code, String userName) {
