@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,8 +37,6 @@ public class Requester extends AsyncTask<Void, Void, Void> {
         this.progress = new ProgressDialog(context);;
         this.context = context;
         this.syncVisits();
-        Log.d("JSON", data);
-        this.execute();
     }
 
     private static JSONArray toJsonArray(List<Visit> visits) throws JSONException {
@@ -52,15 +51,21 @@ public class Requester extends AsyncTask<Void, Void, Void> {
         helper.open();
 
         List<Visit> visits = Visit.allNotSynced(helper);
-        try {
 
-            data = toJsonArray(visits).toString();
-            Visit.updateAsSynchronized(helper, visits);
+        if(visits.size()>0) {
+            try {
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+                data = toJsonArray(visits).toString();
+                Visit.updateAsSynchronized(helper, visits);
+                Log.d("JSON", data);
+                this.execute();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }else{
+            Toast.makeText(context, "As visitas já estão sincronizadas!", Toast.LENGTH_LONG).show();
         }
-
         helper.close();
 
     }
