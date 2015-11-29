@@ -117,7 +117,11 @@ public class Visit {
 
     public static List<Visit> all(DBHelper db, String where) {
         List<Visit> list = new ArrayList<Visit>();
-        Cursor cursor = db.getDB().query(TABLE_NAME, COLUMNS, where, null, null, null, COL_ID);
+
+        String sortOrder =
+                COL_SYNCED + " DESC, " +
+                COL_ID + " ASC";
+        Cursor cursor = db.getDB().query(TABLE_NAME, COLUMNS, where, null, null, null, sortOrder);
 
         if(cursor.getCount() > 0){
             cursor.moveToFirst();

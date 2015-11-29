@@ -58,5 +58,6 @@ public class VisitsActivity extends KioskHandlerActivity {
 
     public void syncVisits(View view){
         new Requester(this);
+        loadVisits();
     }
 }

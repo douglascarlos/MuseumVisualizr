@@ -118,7 +118,5 @@ public class Requester extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         progress.dismiss();
-        Intent intent = new Intent(context, VisitsActivity.class);
-        context.startActivity(intent);
     }
 }
