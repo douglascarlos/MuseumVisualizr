@@ -80,6 +80,7 @@ public class Requester extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
         try{
+            String androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
 
             StringBuilder values = new StringBuilder();
             values.append(URLEncoder.encode("json", "UTF-8"));
@@ -90,8 +91,8 @@ public class Requester extends AsyncTask<Void, Void, Void> {
 
             values.append(URLEncoder.encode("android_id", "UTF-8"));
             values.append("=");
-            values.append(URLEncoder.encode(Settings.Secure.ANDROID_ID, "UTF-8"));
-            Log.d("ANDROID_ID", Settings.Secure.ANDROID_ID);
+            values.append(URLEncoder.encode(androidId, "UTF-8"));
+            Log.d("ANDROID_ID", androidId);
 
             URL url = new URL("http://" + SERVICE_DOMAIN + "/sync.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -107,7 +108,6 @@ public class Requester extends AsyncTask<Void, Void, Void> {
             out.flush();
 
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            Log.d("POST_DATA", values.toString());
             Log.d("CODE", conn.getResponseCode() + "");
             Log.d("IN", in.readLine());
 
