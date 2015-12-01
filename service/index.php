@@ -1,5 +1,6 @@
 <?PHP
 error_reporting(0);
+date_default_timezone_set('America/Sao_Paulo');
 $user = 'u621408458_user';
 $password = 'museumvisualizr@2015';
 $db = 'u621408458_museu';
@@ -17,7 +18,6 @@ $db_selected = mysql_select_db(
    $link
 );
 
-	
 $query = "SELECT 
 				id, kiosk, 
 				DATE_FORMAT(visit_date,'%d/%m/%Y %H:%i:%s') visit_date, 
@@ -25,7 +25,7 @@ $query = "SELECT
 		  	FROM 
 		  		visits 
 	  		ORDER BY 
-	  			visit_date DESC";
+	  			id DESC";
 $rs = mysql_query($query);
 mysql_error();
 ?>
