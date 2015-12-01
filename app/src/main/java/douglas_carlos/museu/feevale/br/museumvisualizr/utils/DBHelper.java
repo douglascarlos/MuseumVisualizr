@@ -48,7 +48,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static String getToday(){
         Calendar c = Calendar.getInstance();
         return c.get(Calendar.YEAR) +"-"+
-                c.get(Calendar.MONTH) +"-"+
+                (c.get(Calendar.MONTH) + 1) +"-"+
                 c.get(Calendar.DAY_OF_MONTH) +" "+
                 c.get(Calendar.HOUR_OF_DAY) +":"+
                 c.get(Calendar.MINUTE) +":"+
